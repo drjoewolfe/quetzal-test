@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 public class QuetzalAssertions {
@@ -68,7 +69,10 @@ public class QuetzalAssertions {
         }
     }
 
-    public static void assertPairListEquals(List<Pair<Integer, Integer>> expected, List<Pair<Integer, Integer>> actual) {
-
+    public static <T> void assertSetEquals(Set<T> set1, Set<T> set2) {
+        assertEquals(set1.size(), set2.size());
+        for(var item : set1) {
+            assertTrue(set2.contains(item));
+        }
     }
 }
