@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
@@ -73,6 +74,20 @@ public class QuetzalAssertions {
         assertEquals(set1.size(), set2.size());
         for(var item : set1) {
             assertTrue(set2.contains(item));
+        }
+    }
+
+    public static <T> void assertQueueEquals(Queue<T> expectedQueue, Queue<T> queue) {
+        assertEquals(expectedQueue.size(), queue.size());
+
+        var iter1 = expectedQueue.iterator();
+        var iter2 = queue.iterator();
+
+        while(iter1.hasNext()) {
+            T item1 = iter1.next();
+            T item2 = iter2.next();
+
+            assertEquals(item1, item2);
         }
     }
 }
