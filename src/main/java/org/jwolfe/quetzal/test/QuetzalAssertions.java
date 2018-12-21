@@ -90,4 +90,18 @@ public class QuetzalAssertions {
             assertEquals(item1, item2);
         }
     }
+
+    public static void assertTwoDimensionalArrayEquals(int[][] arr1, int[][] arr2) {
+        if(arr1 == null && arr2 == null) {
+            return;
+        }
+
+        assertNotNull(arr1);
+        assertNotNull(arr2);
+
+        assertEquals(arr1.length, arr2.length);
+        for (int i = 0; i < arr1.length; i++) {
+            assertArrayEquals(arr1[i], arr2[i]);
+        }
+    }
 }
