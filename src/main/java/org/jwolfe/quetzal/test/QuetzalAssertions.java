@@ -2,6 +2,7 @@ package org.jwolfe.quetzal.test;
 
 import org.jwolfe.quetzal.library.general.Pair;
 import org.jwolfe.quetzal.library.list.LinkedListNode;
+import org.jwolfe.quetzal.library.list.AuxiliaryLinkedListNode;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,6 +46,24 @@ public class QuetzalAssertions {
             fail("head ran to completion; expected still left.");
         }
     }
+    
+	public static void assertAuxiliaryLinkedListEquals(AuxiliaryLinkedListNode expected, AuxiliaryLinkedListNode actuals) {
+        while(expected != null && actuals != null) {
+            assertEquals(expected.getData(), actuals.getData());
+            assertEquals(expected.getAuxiliary().getData(), actuals.getAuxiliary().getData());
+
+            expected = expected.getNext();
+            actuals = actuals.getNext();
+        }
+
+        if(expected != null) {
+            fail("actuals ran to completion; expected still left.");
+        }
+
+        if(actuals != null) {
+        	fail("expected ran to completion; actuals still left.");
+        }		
+	}
 
     public static void assertStackEquals(Stack<Integer> expected, Stack<Integer> actual) {
         if(expected == null && actual == null) {
