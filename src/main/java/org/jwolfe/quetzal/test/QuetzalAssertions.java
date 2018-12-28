@@ -123,4 +123,18 @@ public class QuetzalAssertions {
             assertArrayEquals(arr1[i], arr2[i]);
         }
     }
+
+    public static void assertTwoDimensionalArrayEquals(char[][] arr1, char[][] arr2) {
+        if(arr1 == null && arr2 == null) {
+            return;
+        }
+
+        assertNotNull(arr1);
+        assertNotNull(arr2);
+
+        assertEquals(arr1.length, arr2.length);
+        for (int i = 0; i < arr1.length; i++) {
+            assertArrayEquals(arr1[i], arr2[i]);
+        }
+    }
 }
