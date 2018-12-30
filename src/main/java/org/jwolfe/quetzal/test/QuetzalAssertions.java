@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
@@ -144,4 +145,12 @@ public class QuetzalAssertions {
             assertTrue(actual.contains(item));
         }
     }
+
+	public static <K, V> void assertMapEquals(Map<K, V> expected, Map<K, V> actual) {
+        assertEquals(expected.size(), actual.size());
+        for(var key : expected.keySet()) {
+            assertTrue(actual.containsKey(key));
+            assertEquals(expected.get(key), actual.get(key));
+        }		
+	}
 }
