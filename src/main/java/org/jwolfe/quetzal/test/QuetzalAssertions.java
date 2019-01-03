@@ -140,6 +140,11 @@ public class QuetzalAssertions {
     }
 
     public static <T> void assertListEquals(List<T> expected, List<T> actual) {
+    	if(expected == null) {
+    		assertNull(actual);
+    	}
+    	
+    	assertNotNull(actual);
         assertEquals(expected.size(), actual.size());
         for(var item : expected) {
             assertTrue(actual.contains(item));
