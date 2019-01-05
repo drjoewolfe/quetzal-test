@@ -14,13 +14,13 @@ import java.util.Stack;
 
 public class QuetzalAssertions {
     public static void assertLinkedListEquals(LinkedListNode expected, LinkedListNode actuals) {
-        while(true) {
-            if(expected == null
+        while (true) {
+            if (expected == null
                     && actuals == null) {
                 return;
             }
 
-            if(expected == null
+            if (expected == null
                     || actuals == null) {
                 fail("Null encountered, expected node.");
             }
@@ -32,24 +32,24 @@ public class QuetzalAssertions {
     }
 
     public static void assertLinkedLists(LinkedListNode head, LinkedListNode expected) {
-        while(head != null && expected != null) {
+        while (head != null && expected != null) {
             assertEquals(expected.getData(), head.getData());
 
             head = head.getNext();
             expected = expected.getNext();
         }
 
-        if(head != null) {
+        if (head != null) {
             fail("expected ran to completion; head still left.");
         }
 
-        if(expected != null) {
+        if (expected != null) {
             fail("head ran to completion; expected still left.");
         }
     }
-    
-	public static void assertAuxiliaryLinkedListEquals(AuxiliaryLinkedListNode expected, AuxiliaryLinkedListNode actuals) {
-        while(expected != null && actuals != null) {
+
+    public static void assertAuxiliaryLinkedListEquals(AuxiliaryLinkedListNode expected, AuxiliaryLinkedListNode actuals) {
+        while (expected != null && actuals != null) {
             assertEquals(expected.getData(), actuals.getData());
             assertEquals(expected.getAuxiliary().getData(), actuals.getAuxiliary().getData());
 
@@ -57,32 +57,32 @@ public class QuetzalAssertions {
             actuals = actuals.getNext();
         }
 
-        if(expected != null) {
+        if (expected != null) {
             fail("actuals ran to completion; expected still left.");
         }
 
-        if(actuals != null) {
-        	fail("expected ran to completion; actuals still left.");
-        }		
-	}
+        if (actuals != null) {
+            fail("expected ran to completion; actuals still left.");
+        }
+    }
 
     public static void assertStackEquals(Stack<Integer> expected, Stack<Integer> actual) {
-        if(expected == null && actual == null) {
+        if (expected == null && actual == null) {
             return;
         }
 
-        if(expected == null || actual == null) {
+        if (expected == null || actual == null) {
             fail("Expected or actual is null.");
         }
 
-        if(expected.size() != actual.size()) {
+        if (expected.size() != actual.size()) {
             fail("Expected and actual have different sizes.");
         }
 
         Stack<Integer> expectedClone = (Stack<Integer>) expected.clone();
         Stack<Integer> actualClone = (Stack<Integer>) actual.clone();
 
-        while(!expectedClone.isEmpty()) {
+        while (!expectedClone.isEmpty()) {
             int e = expectedClone.pop();
             int a = actualClone.pop();
 
@@ -90,20 +90,32 @@ public class QuetzalAssertions {
         }
     }
 
-    public static <T> void assertSetEquals(Set<T> set1, Set<T> set2) {
-        assertEquals(set1.size(), set2.size());
-        for(var item : set1) {
-            assertTrue(set2.contains(item));
+    public static <T> void assertSetEquals(Set<T> expected, Set<T> actual) {
+        if (expected == null) {
+            assertNull(actual);
+        }
+
+        assertNotNull(actual);
+
+        assertEquals(expected.size(), actual.size());
+        for (var item : expected) {
+            assertTrue(actual.contains(item));
         }
     }
 
-    public static <T> void assertQueueEquals(Queue<T> expectedQueue, Queue<T> queue) {
-        assertEquals(expectedQueue.size(), queue.size());
+    public static <T> void assertQueueEquals(Queue<T> expected, Queue<T> actual) {
+        if (expected == null) {
+            assertNull(actual);
+        }
 
-        var iter1 = expectedQueue.iterator();
-        var iter2 = queue.iterator();
+        assertNotNull(actual);
 
-        while(iter1.hasNext()) {
+        assertEquals(expected.size(), actual.size());
+
+        var iter1 = expected.iterator();
+        var iter2 = actual.iterator();
+
+        while (iter1.hasNext()) {
             T item1 = iter1.next();
             T item2 = iter2.next();
 
@@ -112,7 +124,7 @@ public class QuetzalAssertions {
     }
 
     public static void assertTwoDimensionalArrayEquals(int[][] arr1, int[][] arr2) {
-        if(arr1 == null && arr2 == null) {
+        if (arr1 == null && arr2 == null) {
             return;
         }
 
@@ -126,7 +138,7 @@ public class QuetzalAssertions {
     }
 
     public static void assertTwoDimensionalArrayEquals(char[][] arr1, char[][] arr2) {
-        if(arr1 == null && arr2 == null) {
+        if (arr1 == null && arr2 == null) {
             return;
         }
 
@@ -140,22 +152,22 @@ public class QuetzalAssertions {
     }
 
     public static <T> void assertListEquals(List<T> expected, List<T> actual) {
-    	if(expected == null) {
-    		assertNull(actual);
-    	}
-    	
-    	assertNotNull(actual);
+        if (expected == null) {
+            assertNull(actual);
+        }
+
+        assertNotNull(actual);
         assertEquals(expected.size(), actual.size());
-        for(var item : expected) {
+        for (var item : expected) {
             assertTrue(actual.contains(item));
         }
     }
 
-	public static <K, V> void assertMapEquals(Map<K, V> expected, Map<K, V> actual) {
+    public static <K, V> void assertMapEquals(Map<K, V> expected, Map<K, V> actual) {
         assertEquals(expected.size(), actual.size());
-        for(var key : expected.keySet()) {
+        for (var key : expected.keySet()) {
             assertTrue(actual.containsKey(key));
             assertEquals(expected.get(key), actual.get(key));
-        }		
-	}
+        }
+    }
 }
