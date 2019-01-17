@@ -163,6 +163,18 @@ public class QuetzalAssertions {
         }
     }
 
+    public static <T> void assertListStrictEquals(List<T> expected, List<T> actual) {
+        if (expected == null) {
+            assertNull(actual);
+        }
+
+        assertNotNull(actual);
+        assertEquals(expected.size(), actual.size());
+        for (int i = 0; i < expected.size(); i++) {
+            assertEquals(expected.get(i), actual.get(i));
+        }
+    }
+
     public static <T> void assertListOfListEquals(List<List<T>> expected, List<List<T>> actual) {
         if (expected == null) {
             assertNull(actual);
