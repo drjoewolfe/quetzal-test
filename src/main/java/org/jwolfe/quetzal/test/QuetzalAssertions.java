@@ -187,6 +187,31 @@ public class QuetzalAssertions {
         }
     }
 
+    public static <T> void assertListOfListStrictlyContainsList(List<List<T>> expectedInList, List<T> actual) {
+        assertNotNull(expectedInList);
+        assertNotNull(actual);
+
+        boolean foundInList = false;
+        for(var list : expectedInList) {
+            if(list.size() != actual.size()) {
+                continue;
+            }
+
+            for (int i = 0; i < list.size(); i++) {
+                if(!list.get(i).equals(actual.get(i))) {
+                    continue;
+                }
+            }
+
+            foundInList = true;
+            break;
+        }
+
+        if(!foundInList) {
+            fail("actual not found in expected list");
+        }
+    }
+
     public static <K, V> void assertMapEquals(Map<K, V> expected, Map<K, V> actual) {
         assertEquals(expected.size(), actual.size());
         for (var key : expected.keySet()) {
