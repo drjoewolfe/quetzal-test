@@ -4,6 +4,8 @@ import org.jwolfe.quetzal.library.general.Pair;
 import org.jwolfe.quetzal.library.list.LinkedListNode;
 import org.jwolfe.quetzal.library.list.AuxiliaryLinkedListNode;
 import org.junit.jupiter.api.Test;
+import org.jwolfe.quetzal.library.tree.BinaryTreeNode;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
@@ -217,6 +219,19 @@ public class QuetzalAssertions {
         for (var key : expected.keySet()) {
             assertTrue(actual.containsKey(key));
             assertEquals(expected.get(key), actual.get(key));
+        }
+    }
+
+    public static void assertListOfTreeNodesAreEqualOnData(List<BinaryTreeNode> expected, List<BinaryTreeNode> actual) {
+        if(expected == null) {
+            assertNull(actual);
+            return;
+        }
+
+        assertNotNull(actual);
+        assertEquals(expected.size(), actual.size());
+        for(var node : expected) {
+            assertNotNull(actual.stream().mapToInt(n -> n.getData()).filter(i -> i == node.getData()));
         }
     }
 }
